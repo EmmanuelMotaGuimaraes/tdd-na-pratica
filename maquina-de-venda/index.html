@@ -15,15 +15,15 @@
     <script src="https://code.jquery.com/qunit/qunit-1.18.0.js"></script>
 
     <script>
-        const cedulasDisponiveis = [100, 50, 20, 10, 5, 2, 1]
+        
         function calcularTroco(precoDoProduto,valorPago){
-            ValorTroco = valorPago - precoDoProduto 
-            troco = []
-
-            for(let i = 0; i < cedulasDisponiveis.length; i++){
-                while(ValorTroco - cedulasDisponiveis[i] >= 0){
-                    ValorTroco -= cedulasDisponiveis[i]
-                    troco.push(cedulasDisponiveis[i])
+            const cedulasDisponiveis = [100, 50, 20, 10, 5, 2, 1]
+            let restante = valorPago - precoDoProduto 
+            let troco = []
+            for (const cedula of cedulasDisponiveis) {
+                while(restante - cedula >= 0){
+                    restante -= cedula
+                    troco.push(cedula)
                 }
             }
             return troco
