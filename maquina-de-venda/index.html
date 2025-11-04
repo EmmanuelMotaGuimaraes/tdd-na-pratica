@@ -16,7 +16,7 @@
 
     <script>
         
-        function calcularTroco(precoDoProduto,valorPago){
+        function calcularTroco(precoDoProduto,valorPago, estoque){
             const cedulasDisponiveis = [100, 50, 20, 10, 5, 2, 1]
             let restante = valorPago - precoDoProduto 
             let troco = []
@@ -54,6 +54,13 @@
             const trocoEsperado = [100, 50, 20, 10, 5, 2, 1]
             assert.deepEqual(trocoCalculado, trocoEsperado)
         })
+
+        test('calcularTroco(20, 100, estoque{ 100: 1, 50: 0, 20: 5, 10: 10 } ) deve retornar [20, 20, 20, 20]', (assert) => {
+            const trocoCalculado = calcularTroco(20, 100, { 100: 1, 50: 0, 20: 5, 10: 10 })
+            const trocoEsperado = [20, 20, 20, 20]
+            assert.deepEqual(trocoCalculado, trocoEsperado)
+        })
+
     </script>
 
   </body>
