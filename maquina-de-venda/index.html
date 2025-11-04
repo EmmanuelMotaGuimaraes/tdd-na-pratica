@@ -16,20 +16,25 @@
 
     <script>
         
+        function cedulasLimitadas(trocovalor, troco, cedulas, estoque){
+            for(const cedula of cedulas){
+                let quantidadeDisponivel = estoque ? (estoque[cedula] || 0) : Infinity
+                while(trocovalor >= cedula && quantidadeDisponivel > 0){
+                    troco.push(cedula)
+                    trocovalor -= cedula
+                    quantidadeDisponivel--
+                }
+            }
+            return troco
+        }
+
         function calcularTroco(precoDoProduto,valorPago, estoque){
             const cedulasDisponiveis = [100, 50, 20, 10, 5, 2, 1]
             let trocoDevido = valorPago - precoDoProduto
             let troco = []
-            for(const cedula of cedulasDisponiveis){
-                let quantidadeDisponivel = estoque ? (estoque[cedula] || 0) : Infinity
-                while(trocoDevido >= cedula && quantidadeDisponivel > 0){
-                    troco.push(cedula)
-                    trocoDevido -= cedula
-                    quantidadeDisponivel--
-                }
-            }
             
-            return troco
+            
+            return cedulasLimitadas(trocoDevido, troco, cedulasDisponiveis, estoque)
         }
     </script>
 
